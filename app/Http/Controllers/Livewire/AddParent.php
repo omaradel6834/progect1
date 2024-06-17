@@ -11,46 +11,46 @@ use App\Models\Type_Blood;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+
 class AddParent extends Component
 {
-   // use WithFileUploads;
+    use WithFileUploads;
+
     public $successMessage = '';
+
     public $catchError,$updateMode = false,$photos,$show_table = true,$Parent_id;
+
     public $currentStep = 1,
 
-     // Father_INPUTS
-     $Email, $Password,
-     $Name_Father, $Name_Father_en,
-     $National_ID_Father, $Passport_ID_Father,
-     $Phone_Father, $Job_Father, $Job_Father_en,
-     $Nationality_Father_id, $Blood_Type_Father_id,
-     $Address_Father, $Religion_Father_id,
+        // Father_INPUTS
+        $Email, $Password,
+        $Name_Father, $Name_Father_en,
+        $National_ID_Father, $Passport_ID_Father,
+        $Phone_Father, $Job_Father, $Job_Father_en,
+        $Nationality_Father_id, $Blood_Type_Father_id,
+        $Address_Father, $Religion_Father_id,
 
-     // Mother_INPUTS
-     $Name_Mother, $Name_Mother_en,
-     $National_ID_Mother, $Passport_ID_Mother,
-     $Phone_Mother, $Job_Mother, $Job_Mother_en,
-     $Nationality_Mother_id, $Blood_Type_Mother_id,
-     $Address_Mother, $Religion_Mother_id;
+        // Mother_INPUTS
+        $Name_Mother, $Name_Mother_en,
+        $National_ID_Mother, $Passport_ID_Mother,
+        $Phone_Mother, $Job_Mother, $Job_Mother_en,
+        $Nationality_Mother_id, $Blood_Type_Mother_id,
+        $Address_Mother, $Religion_Mother_id;
 
 
-
-     public function updated($propertyName)
-     {
-         $this->validateOnly($propertyName, [
-             'Email' => 'required|email',
-             'National_ID_Father' => 'required|string|min:10|max:10|regex:/[0-9]{9}/',
-             'Passport_ID_Father' => 'min:10|max:10',
-             'Phone_Father' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-             'National_ID_Mother' => 'required|string|min:10|max:10|regex:/[0-9]{9}/',
-             'Passport_ID_Mother' => 'min:10|max:10',
-             'Phone_Mother' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
-         ]);
-     }
-
-     public function showformadd(){
-        $this->show_table = false;
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName, [
+            'Email' => 'required|email',
+            'National_ID_Father' => 'required|string|min:10|max:10|regex:/[0-9]{9}/',
+            'Passport_ID_Father' => 'min:10|max:10',
+            'Phone_Father' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'National_ID_Mother' => 'required|string|min:10|max:10|regex:/[0-9]{9}/',
+            'Passport_ID_Mother' => 'min:10|max:10',
+            'Phone_Mother' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
+        ]);
     }
+
 
     public function render()
     {
@@ -60,8 +60,16 @@ class AddParent extends Component
             'Religions' => Religion::all(),
             'my_parents' => My_Parent::all(),
         ]);
+
     }
 
+    public function showformadd(){
+        $this->show_table = false;
+    }
+
+
+
+    //firstStepSubmit
     public function firstStepSubmit()
     {
        $this->validate([
@@ -83,8 +91,7 @@ class AddParent extends Component
         $this->currentStep = 2;
     }
 
-
-   //secondStepSubmit
+    //secondStepSubmit
     public function secondStepSubmit()
     {
 
@@ -257,9 +264,11 @@ class AddParent extends Component
 
     }
 
+
     //back
     public function back($step)
     {
         $this->currentStep = $step;
     }
+
 }

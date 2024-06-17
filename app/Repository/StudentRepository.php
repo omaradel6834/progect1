@@ -141,7 +141,7 @@ class StudentRepository implements StudentRepositoryInterface{
 
     public function Delete_Student($request)
     {
-
+      
         Student::destroy($request->id);
         toastr()->error(trans('messages.Delete'));
         return redirect()->route('Students.index');
